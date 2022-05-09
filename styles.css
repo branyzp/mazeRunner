@@ -3,57 +3,81 @@ body{
     background-color: rgb(141, 234, 203);
 }
 
+
 h1{
-    font-family: 'VT323', sans-serif;
+    font-family: 'Cinzel', serif;
     color: black;
+    border-radius: 25px;
+    background-color: white;
     text-align: center;
+    width: 35%;
+    border: 4px solid black;
+}
+
+h2{
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
 }
 
 
 /************************** CLASS SELECTORS ****************************/
-.gameBoard{
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    width: 1000px;
-    height: 1000px;
-    border: 1px solid black;
-}
-
-.displayScore{
-    font-family: 'VT323', sans-serif;
-    font-size: 50px;
+.welcome{
     text-align: center;
 }
 
-.playAgainPopup{
-    background: rgb(108, 142, 150);
+.flex-container{
+    display: flex;
+
+}
+
+.instructions{
+    display: inline-block;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 25px;
     width: 300px;
     height: 300px;
-    position: fixed;
-    top: 100px;
-    left: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 5px;
+    flex: 1;
+}
+.gameBoard{
+    margin: 0 auto;
+    width: 500px;
+    height: 500px;
     border: 1px solid black;
-    font-family: 'VT323', sans-serif;
-    text-align: center;
+    background-color: white;
+    display: inline-block;
+    border-radius: 25px;
+    padding: 5px;
+    flex: 1;
+}
+
+
+
+.displayScore{
+    font-family: 'Cinzel', serif;
     font-size: 50px;
-    display: block;
+    text-align: center;
+    position: static;
+    background-color: aliceblue;
+    border: 1px solid black;
+    border-radius: 25px;
 }
 
 .mazeText{
     font-size: 50px;
+    display: inline-block;
 }
 
 /************************** ID SELECTORS ******************************/
-#hello-msg{
-    font-size:400%;
-}
-
-#welcome-msg {
-    font-size: 400%;
+#hello-msg, #welcome-msg{
+    font-size:200%;
+    font-family: 'Cinzel', serif;
+    border: none;
+    background-color: rgb(141, 234, 203);
+    display: block;
+    text-align: center;
+    margin: 0px auto;
 }
 #nokia{
     display: block;
@@ -62,3 +86,8 @@ h1{
     width: 70%;
 }
 
+.maze-game-page{
+    background-image: url(images/papyrus-bg.jpg);
+    display: inline-block;
+    text-align: center;
+}
