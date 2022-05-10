@@ -33,23 +33,25 @@ h2{
 .instructions{
     display: inline-block;
     border: 1px solid black;
-    background-color: white;
+    background-color: wheat;
     border-radius: 25px;
     width: 300px;
     height: 300px;
     padding: 5px;
     flex: 1;
+    margin: 2%;
 }
 .gameBoard{
     margin: 0 auto;
     width: 500px;
     height: 500px;
     border: 1px solid black;
-    background-color: white;
+    background-color: wheat;
     display: inline-block;
     border-radius: 25px;
     padding: 5px;
-    flex: 1;
+    flex: 2;
+    margin: 2%;
 }
 
 
@@ -59,7 +61,7 @@ h2{
     font-size: 50px;
     text-align: center;
     position: static;
-    background-color: aliceblue;
+    background-color: wheat;
     border: 1px solid black;
     border-radius: 25px;
 }
@@ -90,4 +92,5 @@ h2{
     background-image: url(images/papyrus-bg.jpg);
     display: inline-block;
     text-align: center;
+    width: 100%;
 }
