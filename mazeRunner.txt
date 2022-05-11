@@ -1,0 +1,10 @@
+User stories
+1. user must be able to move through a pre-determined grid-based map 
+2. user must be able to pick up items (sword, key)
+3. user must be able to control using arrow keys on keyboard as well as clicking on screen
+
+Data
+
+
+Logic
+

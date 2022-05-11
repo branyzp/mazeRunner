@@ -3,6 +3,10 @@ body{
     background-color: rgb(141, 234, 203);
 }
 
+body.success {
+    background-image: url(images/success-freedom.jpg);
+    transition: 0.2s ease  ;
+}
 
 h1{
     font-family: 'Cinzel', serif;
