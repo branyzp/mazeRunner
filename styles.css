@@ -1,100 +1,14 @@
-/************************** ELEMENT SELECTORS ****************************/
+h1 {
+    color: darkolivegreen;
+}
+
+#game{
+    box-shadow: 10px 10px 15px black;
+}
+
 body{
-    background-color: rgb(141, 234, 203);
-}
-
-body.success {
-    background-image: url(images/success-freedom.jpg);
-    transition: 0.2s ease  ;
-}
-
-h1{
-    font-family: 'Cinzel', serif;
-    color: black;
-    border-radius: 25px;
-    background-color: white;
-    text-align: center;
-    width: 35%;
-    border: 4px solid black;
-}
-
-h2{
-    font-family: 'Cinzel', serif;
-    font-size: 20px;
-}
-
-
-/************************** CLASS SELECTORS ****************************/
-.welcome{
-    text-align: center;
-}
-
-.flex-container{
     display: flex;
-
-}
-
-.instructions{
-    display: inline-block;
-    border: 1px solid black;
-    background-color: wheat;
-    border-radius: 25px;
-    width: 300px;
-    height: 300px;
-    padding: 5px;
-    flex: 1;
-    margin: 2%;
-}
-.gameBoard{
-    margin: 0 auto;
-    width: 500px;
-    height: 500px;
-    border: 1px solid black;
-    background-color: wheat;
-    display: inline-block;
-    border-radius: 25px;
-    padding: 5px;
-    flex: 2;
-    margin: 2%;
-}
-
-
-
-.displayScore{
-    font-family: 'Cinzel', serif;
-    font-size: 50px;
-    text-align: center;
-    position: static;
-    background-color: wheat;
-    border: 1px solid black;
-    border-radius: 25px;
-}
-
-.mazeText{
-    font-size: 50px;
-    display: inline-block;
-}
-
-/************************** ID SELECTORS ******************************/
-#hello-msg, #welcome-msg{
-    font-size:200%;
-    font-family: 'Cinzel', serif;
-    border: none;
-    background-color: rgb(141, 234, 203);
-    display: block;
-    text-align: center;
-    margin: 0px auto;
-}
-#nokia{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 70%;
-}
-
-.maze-game-page{
-    background-image: url(images/papyrus-bg.jpg);
-    display: inline-block;
-    text-align: center;
-    width: 100%;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(0deg, rgb(200, 148, 52), rgb(196, 174, 133))
 }
