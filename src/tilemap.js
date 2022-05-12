@@ -1,3 +1,5 @@
+import Player from './player.js';
+
 export default class TileMap {
 	constructor(tileSize) {
 		this.tileSize = tileSize;
@@ -6,7 +8,7 @@ export default class TileMap {
 		this.door = this.#image('door.jpg');
 		this.enemy = this.#image('enemy.jpg');
 		this.key = this.#image('key.jpg');
-		this.player = this.#image('player.jpg');
+		// this.player = this.#image('player.jpg');
 	}
 
 	#image(fileName) {
@@ -21,7 +23,6 @@ export default class TileMap {
 	// 3 = key
 	// 4 = door
 	// 5 = player
-	///6 = powerup
 	map = [
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 		[1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -30,9 +31,9 @@ export default class TileMap {
 		[1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
 		[1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
 		[1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1],
-		[1, 0, 1, 0, 1, 0, 1, 1, 3, 1, 0, 1, 1, 0, 1],
+		[1, 0, 1, 0, 1, 0, 1, 3, 0, 1, 0, 1, 1, 0, 1],
 		[1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1],
-		[1, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 1],
+		[1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 1],
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 	];
 
@@ -63,9 +64,9 @@ export default class TileMap {
 					case 4:
 						image = this.door;
 						break;
-					case 5:
-						image = this.player;
-						break;
+					// case 5:
+					// 	image = this.player;
+					// 	break;
 				}
 
 				if (image != null)
@@ -88,5 +89,23 @@ export default class TileMap {
 	#setCanvasSize(canvas) {
 		canvas.height = this.map.length * this.tileSize;
 		canvas.width = this.map[0].length * this.tileSize;
+	}
+
+	getPlayer(velocity) {
+		for (let row = 0; row < this.map.length; row++) {
+			for (let column = 0; column < this.map[row].length; column++) {
+				let tile = this.map[row][column];
+				if (tile === 5) {
+					this.map[row][column] = 0;
+					return new Player(
+						column * this.tileSize,
+						row * this.tileSize,
+						this.tileSize,
+						velocity,
+						this
+					);
+				}
+			}
+		}
 	}
 }

@@ -6,10 +6,11 @@ const tileSize = 64;
 const velocity = 1;
 
 const tileMap = new TileMap(tileSize);
-// const warrior = tileMap.getWarrior(velocity);
+const player = tileMap.getPlayer(velocity);
 
 function gameLoop() {
 	tileMap.draw(canvas, ctx);
+	player.draw(ctx);
 }
 
 setInterval(gameLoop, 1000 / 60);
