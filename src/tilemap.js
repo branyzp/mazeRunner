@@ -109,4 +109,87 @@ export default class TileMap {
 			}
 		}
 	}
+
+	// collidedWithEnvironment(x, y, direction) {
+	// 	if (
+	// 		Number.isInteger(x / this.tileSize) &&
+	// 		Number.isInteger(y / this.tileSize)
+	// 	) {
+	// 		let column = 0;
+	// 		let row = 0;
+	// 		let nextColumn = 0;
+	// 		let nextRow = 0;
+
+	// 		switch (direction) {
+	// 			case moveDirection.right:
+	// 				nextColumn = x + this.tileSize;
+	// 				column = nextColumn / this.tileSize;
+	// 				row = y / this.tileSize;
+	// 				break;
+	// 			case moveDirection.left:
+	// 				nextColumn = x - this.tileSize;
+	// 				column = nextColumn / this.tileSize;
+	// 				row = y / this.tileSize;
+	// 			case moveDirection.up:
+	// 				nextRow = y - this.tileSize;
+	// 				column = x / this.tileSize;
+	// 				row = nextRow / this.tileSize;
+	// 				break;
+	// 			case moveDirection.down:
+	// 				nextRow = y + this.tileSize;
+	// 				column = x / this.tileSize;
+	// 				row = nextRow / this.tileSize;
+	// 				break;
+	// 		}
+	// 		const tile = this.map[row][column];
+	// 		if (tile === 1) {
+	// 			return true;
+	// 		}
+	// 	}
+	// 	return false;
+	// }
+
+	collidedWithEnvironment(x, y, direction) {
+		if (direction == null) {
+			return;
+		}
+
+		if (
+			Number.isInteger(x / this.tileSize) &&
+			Number.isInteger(y / this.tileSize)
+		) {
+			let column = 0;
+			let row = 0;
+			let nextColumn = 0;
+			let nextRow = 0;
+
+			switch (direction) {
+				case moveDirection.right:
+					nextColumn = x + this.tileSize;
+					column = nextColumn / this.tileSize;
+					row = y / this.tileSize;
+					break;
+				case moveDirection.left:
+					nextColumn = x - this.tileSize;
+					column = nextColumn / this.tileSize;
+					row = y / this.tileSize;
+					break;
+				case moveDirection.up:
+					nextRow = y - this.tileSize;
+					row = nextRow / this.tileSize;
+					column = x / this.tileSize;
+					break;
+				case moveDirection.down:
+					nextRow = y + this.tileSize;
+					row = nextRow / this.tileSize;
+					column = x / this.tileSize;
+					break;
+			}
+			const tile = this.map[row][column];
+			if (tile === 1) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
