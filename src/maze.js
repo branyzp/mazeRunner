@@ -13,4 +13,4 @@ function gameLoop() {
 	player.draw(ctx);
 }
 
-setInterval(gameLoop, 1000 / 60);
+setInterval(gameLoop, 1000 / 75);

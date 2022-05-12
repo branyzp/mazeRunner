@@ -1,4 +1,5 @@
 import Player from './player.js';
+import moveDirection from './moveDirection.js';
 
 export default class TileMap {
 	constructor(tileSize) {
