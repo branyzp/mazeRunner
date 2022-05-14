@@ -14,11 +14,40 @@ export default class Enemy {
 		);
 
 		this.directionTimerDefault = this.#random(10, 50);
+		this.directionTimer = this.directionTimerDefault;
 	}
 
 	draw(ctx) {
 		this.#move();
+		this.#changeDirection();
 		ctx.drawImage(this.image, this.x, this.y, this.tileSize, this.tileSize);
+	}
+
+	#changeDirection() {
+		this.directionTimer--;
+		let newMoveDirection = null;
+		if (this.directionTimer == 0) {
+			this.directionTimer = this.directionTimerDefault;
+			newMoveDirection = Math.floor(
+				Math.random() * Object.keys(moveDirection).length
+			);
+		}
+		if (newMoveDirection != null && this.moveDirection != newMoveDirection) {
+			if (
+				Number.isInteger(this.x / this.tileSize) &&
+				Number.isInteger(this.y / this.tileSize)
+			) {
+				if (
+					!this.tileMap.collidedWithEnvironment(
+						this.x,
+						this.y,
+						newMoveDirection
+					)
+				) {
+					this.moveDirection = newMoveDirection;
+				}
+			}
+		}
 	}
 
 	#move() {

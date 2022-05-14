@@ -56,50 +56,6 @@ export default class Player {
 		this.playerImageIndex = 0;
 	}
 
-	// #keydown = (event) => {
-	// 	//up
-	// 	if (event.keyCode == 38) {
-	// 		if (this.currentMoveDirection == moveDirection.down) {
-	// 			console.log('Up1');
-	// 			this.currentMoveDirection = moveDirection.up;
-	// 		} else {
-	// 			console.log('Up2');
-	// 			this.requestedMoveDirection = moveDirection.up;
-	// 		}
-	// 	}
-	// 	//down
-	// 	if (event.keyCode == 40) {
-	// 		if (this.currentMoveDirection == moveDirection.up) {
-	// 			console.log('Down1');
-	// 			this.currentMoveDirection = moveDirection.down;
-	// 		} else {
-	// 			console.log('Down2');
-	// 			this.requestedMoveDirection == moveDirection.down;
-	// 		}
-	// 	}
-	// 	//left
-	// 	if (event.keyCode == 37) {
-	// 		if (this.currentMoveDirection == moveDirection.right) {
-	// 			console.log('Left1');
-	// 			this.currentMoveDirection = moveDirection.left;
-	// 		} else {
-	// 			console.log('Left2');
-	// 			this.requestedMoveDirection = moveDirection.left;
-	// 		}
-	// 	}
-	// 	//right
-
-	// 	if (event.keyCode == 39) {
-	// 		if (this.currentMoveDirection == moveDirection.left) {
-	// 			console.log('Right1');
-	// 			this.currentMoveDirection = moveDirection.right;
-	// 		} else {
-	// 			console.log('Right2');
-	// 			this.requestedMoveDirection = moveDirection.right;
-	// 		}
-	// 	}
-	// };
-
 	#keydown = (event) => {
 		//up
 		if (event.keyCode == 38) {
