@@ -14,6 +14,8 @@ export default class Player {
 		this.playerAnimationTimerDefault = 10;
 		this.playerAnimationTimer = null;
 
+		this.takeSwordSound = new Audio('../sounds/takeSword.mp3');
+
 		document.addEventListener('keydown', this.#keydown);
 
 		this.#loadPlayerImages();
@@ -33,16 +35,16 @@ export default class Player {
 
 	#loadPlayerImages() {
 		const playerImage1 = new Image();
-		playerImage1.src = './images/player1.jpg';
+		playerImage1.src = './images/player1unarmed.jpg';
 
 		const playerImage2 = new Image();
-		playerImage2.src = './images/player2.jpg';
+		playerImage2.src = './images/player2unarmed.jpg';
 
 		const playerImage3 = new Image();
-		playerImage3.src = './images/player3.jpg';
+		playerImage3.src = './images/player3unarmed.jpg';
 
 		const playerImage4 = new Image();
-		playerImage4.src = './images/player1.jpg';
+		playerImage4.src = './images/player1unarmed.jpg';
 
 		this.playerImages = [
 			playerImage1,
@@ -190,4 +192,10 @@ export default class Player {
 			}
 		}
 	}
+
+	// #takeSword() {
+	// 	if (this.tileMap.takeSword(this.x, this.y)) {
+	// 		this.takeSwordSound.play();
+	// 	}
+	// }
 }

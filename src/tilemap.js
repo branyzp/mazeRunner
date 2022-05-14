@@ -1,4 +1,5 @@
 import Player from './player.js';
+import Enemy from './enemy.js';
 import moveDirection from './moveDirection.js';
 
 export default class TileMap {
@@ -9,6 +10,7 @@ export default class TileMap {
 		this.door = this.#image('door.jpg');
 		this.enemy = this.#image('enemy.jpg');
 		this.key = this.#image('key.jpg');
+		this.sword = this.#image('sword.jpg');
 		// this.player = this.#image('player.jpg');
 	}
 
@@ -24,6 +26,7 @@ export default class TileMap {
 	// 3 = key
 	// 4 = door
 	// 5 = player
+	// 6 = sword powerup
 	map = [
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 		[1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
@@ -32,7 +35,7 @@ export default class TileMap {
 		[1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
 		[1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
 		[1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1],
-		[1, 0, 1, 0, 1, 0, 1, 3, 0, 1, 0, 1, 1, 0, 1],
+		[1, 0, 1, 0, 1, 0, 1, 3, 6, 1, 0, 1, 1, 0, 1],
 		[1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1],
 		[1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 1],
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -68,6 +71,8 @@ export default class TileMap {
 					// case 5:
 					// 	image = this.player;
 					// 	break;
+					case 6:
+						image = this.sword;
 				}
 
 				if (image != null)
@@ -108,6 +113,29 @@ export default class TileMap {
 				}
 			}
 		}
+	}
+
+	getEnemies(velocity) {
+		const enemies = [];
+
+		for (let row = 0; row < this.map.length; row++) {
+			for (let column = 0; column < this.map[row].length; column++) {
+				const tile = this.map[row][column];
+				if (tile == 2) {
+					this.map[row][column] = 0;
+					enemies.push(
+						new Enemy(
+							column * this.tileSize,
+							row * this.tileSize,
+							this.tileSize,
+							velocity,
+							this
+						)
+					);
+				}
+			}
+		}
+		return enemies;
 	}
 
 	// collidedWithEnvironment(x, y, direction) {
@@ -192,4 +220,15 @@ export default class TileMap {
 		}
 		return false;
 	}
+
+	// takeSword(x, y) {
+	// 	const row = y / this.tileSize;
+	// 	const column = x / this.tileSize;
+	// 	console.log(tile);
+	// 	if (Number.isInteger(row) && Number.isInteger(column)) {
+	// 		if (this.map[row][column] === 6) {
+	// 			this.map[row][column] = 0;
+	// 		}
+	// 	}
+	// }
 }
