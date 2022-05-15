@@ -253,7 +253,7 @@ export default class TileMap {
 		if (Number.isInteger(row) && Number.isInteger(column)) {
 			const tile = this.map[row][column];
 			if (tile == 4) {
-				this.map[row][column] = 4;
+				this.map[row][column] = 0;
 				return true;
 			}
 		}

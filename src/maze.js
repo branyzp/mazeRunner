@@ -12,6 +12,7 @@ const enemies = tileMap.getEnemies(velocity);
 let gameOver = false;
 let gameWin = false;
 
+const playerDeathSound = new Audio('../sounds/playerDeath.mp3');
 const gameOverSound = new Audio('../sounds/gameOver.mp3');
 const gameWinSound = new Audio('../sounds/gameWin.mp3');
 
@@ -30,7 +31,6 @@ function checkGameWin() {
 		gameWin = player.escapedMaze;
 		if (gameWin) {
 			gameWinSound.play();
-			console.log('Yay');
 		}
 	}
 }
@@ -39,7 +39,10 @@ function checkGameOver() {
 	if (!gameOver) {
 		gameOver = isGameOver();
 		if (gameOver) {
-			gameOverSound.play();
+			playerDeathSound.play();
+			setTimeout(() => {
+				gameOverSound.play();
+			}, 1000);
 		}
 	}
 }
@@ -51,7 +54,13 @@ function isGameOver() {
 }
 
 function pause() {
-	return !player.madeFirstMove || gameOver;
+	return !player.madeFirstMove || gameOver || gameWin;
+}
+
+function drawGameOver() {
+	if (gameOver || gameWin) {
+		let text = 'You Win';
+	}
 }
 
 setInterval(gameLoop, 1000 / 75);

@@ -214,7 +214,7 @@ export default class Player {
 		setTimeout(() => {
 			document.getElementById('display').innerHTML = '';
 			document.getElementById('display2').innerHTML = '';
-		}, 1000 * 4);
+		}, 1000 * 5);
 	}
 
 	#takeSword() {
@@ -271,10 +271,20 @@ export default class Player {
 		}
 	}
 
+	#displayGameWin() {
+		document.getElementById('display').innerHTML =
+			'Player has escaped the Maze.';
+		document.getElementById('display2').innerHTML = 'Congratulations.';
+	}
+
 	#openDoor() {
 		if (this.tileMap.openDoor(this.x, this.y) && this.keyTaken == true) {
 			this.unlockDoorSound.play();
+			setTimeout(() => {
+				this.unlockDoorSound.pause();
+			}, 1000 * 2);
 			this.escapedMaze = true;
+			this.#displayGameWin();
 		}
 	}
 }

@@ -1,5 +1,9 @@
-h1 {
-    color: darkolivegreen;
+h1,h2 {
+    color: wheat;
+    font-family: 'Macondo', cursive;
+    border-radius: 25%;
+    font-size: 40px;
+    background-color: darkolivegreen;
 }
 
 #game{
@@ -7,8 +11,16 @@ h1 {
 }
 
 body{
-    display: flex;
+    /* display: flex; */
+    text-align: center;
     justify-content: center;
     height: 100vh;
-    background: linear-gradient(0deg, rgb(200, 148, 52), rgb(196, 174, 133))
+    background: linear-gradient(0deg, rgb(200, 148, 52), rgb(196, 174, 133));
+    background-image: url(images/darkBG.jpg);
 }
+
+#enterMaze{
+    width: 30%;
+    border-radius: 25%;
+}
+
