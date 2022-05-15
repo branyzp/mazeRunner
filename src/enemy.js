@@ -17,10 +17,26 @@ export default class Enemy {
 		this.directionTimer = this.directionTimerDefault;
 	}
 
-	draw(ctx) {
-		this.#move();
-		this.#changeDirection();
+	draw(ctx, pause) {
+		if (!pause) {
+			this.#move();
+			this.#changeDirection();
+		}
 		ctx.drawImage(this.image, this.x, this.y, this.tileSize, this.tileSize);
+	}
+
+	collideWith(player) {
+		const size = this.tileSize / 2;
+		if (
+			this.x < player.x + size &&
+			this.x + size > player.x &&
+			this.y < player.y + size &&
+			this.y + size > player.y
+		) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	#changeDirection() {

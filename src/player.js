@@ -15,15 +15,32 @@ export default class Player {
 		this.playerAnimationTimer = null;
 
 		this.takeSwordSound = new Audio('../sounds/takeSword.mp3');
+		this.spartaSound = new Audio('../sounds/thisissparta.mp3');
+		this.takeSwordActive = false;
+
+		this.takeKeySound = new Audio('../sounds/keyPickup.mp3');
+		this.keyTaken = false;
+
+		this.unlockDoorSound = new Audio('../sounds/unlockDoor.mp3');
+
+		this.killEnemySound = new Audio('../sounds/killEnemy.mp3');
+
+		this.madeFirstMove = false;
 
 		document.addEventListener('keydown', this.#keydown);
 
 		this.#loadPlayerImages();
 	}
 
-	draw(ctx) {
-		this.#move();
-		this.#animate();
+	draw(ctx, pause, enemies) {
+		if (!pause) {
+			this.#move();
+			this.#animate();
+		}
+		this.#openDoor();
+		this.#takeSword();
+		this.#takeKey();
+		this.#killEnemy(enemies);
 		ctx.drawImage(
 			this.playerImages[this.playerImageIndex],
 			this.x,
@@ -46,12 +63,40 @@ export default class Player {
 		const playerImage4 = new Image();
 		playerImage4.src = './images/player1unarmed.jpg';
 
-		this.playerImages = [
-			playerImage1,
-			playerImage2,
-			playerImage3,
-			playerImage4,
-		];
+		const playerImage5 = new Image();
+		playerImage5.src = './images/player1.jpg';
+
+		const playerImage6 = new Image();
+		playerImage6.src = './images/player2.jpg';
+
+		const playerImage7 = new Image();
+		playerImage7.src = './images/player3.jpg';
+
+		const playerImage8 = new Image();
+		playerImage8.src = './images/player1.jpg';
+
+		if (this.takeSwordActive == true) {
+			this.playerImages = [
+				playerImage5,
+				playerImage6,
+				playerImage7,
+				playerImage8,
+			];
+		} else {
+			this.playerImages = [
+				playerImage1,
+				playerImage2,
+				playerImage3,
+				playerImage4,
+			];
+		}
+
+		// this.playerImages = [
+		// 	playerImage1,
+		// 	playerImage2,
+		// 	playerImage3,
+		// 	playerImage4,
+		// ];
 
 		this.playerImageIndex = 0;
 	}
@@ -62,24 +107,28 @@ export default class Player {
 			if (this.currentMoveDirection == moveDirection.down)
 				this.currentMoveDirection = moveDirection.up;
 			this.requestedMoveDirection = moveDirection.up;
+			this.madeFirstMove = true;
 		}
 		//down
 		if (event.keyCode == 40) {
 			if (this.currentMoveDirection == moveDirection.up)
 				this.currentMoveDirection = moveDirection.down;
 			this.requestedMoveDirection = moveDirection.down;
+			this.madeFirstMove = true;
 		}
 		//left
 		if (event.keyCode == 37) {
 			if (this.currentMoveDirection == moveDirection.right)
 				this.currentMoveDirection = moveDirection.left;
 			this.requestedMoveDirection = moveDirection.left;
+			this.madeFirstMove = true;
 		}
 		//right
 		if (event.keyCode == 39) {
 			if (this.currentMoveDirection == moveDirection.left)
 				this.currentMoveDirection = moveDirection.right;
 			this.requestedMoveDirection = moveDirection.right;
+			this.madeFirstMove = true;
 		}
 	};
 
@@ -117,23 +166,21 @@ export default class Player {
 		}
 		switch (this.currentMoveDirection) {
 			case moveDirection.up:
-				console.log('move is working up');
 				this.y -= this.velocity;
 				break;
 			case moveDirection.down:
-				console.log('move is working down');
 				this.y += this.velocity;
 				break;
 			case moveDirection.left:
-				console.log('move is working left');
 				this.x -= this.velocity;
 				break;
 			case moveDirection.right:
-				console.log('move is working right');
 				this.x += this.velocity;
 				break;
 		}
 	}
+
+	//"character animation"
 
 	#animate() {
 		if (this.playerAnimationTimer == null) {
@@ -149,9 +196,85 @@ export default class Player {
 		}
 	}
 
-	// #takeSword() {
-	// 	if (this.tileMap.takeSword(this.x, this.y)) {
-	// 		this.takeSwordSound.play();
-	// 	}
-	// }
+	//sword related
+
+	#displaySwordExpireTime() {
+		document.getElementById('instructions').innerHTML = '';
+		document.getElementById('display').innerHTML =
+			'The Gods have blessed you with a sword for 6 seconds. Use it well.';
+		document.getElementById('display2').innerHTML =
+			'You can now kill the snakemen.';
+	}
+
+	#displaySwordExpired() {
+		document.getElementById('display').innerHTML =
+			'The sword has broken under the pressure of the evil labyrinth.';
+		document.getElementById('display2').innerHTML =
+			'You have lost the ability to kill the snakemen. Run.';
+		setTimeout(() => {
+			document.getElementById('display').innerHTML = '';
+			document.getElementById('display2').innerHTML = '';
+		}, 1000 * 4);
+	}
+
+	#takeSword() {
+		if (this.tileMap.takeSword(this.x, this.y)) {
+			//character animation changes to with sword, able to kill snakemen
+			this.takeSwordActive = true;
+			this.#loadPlayerImages();
+			this.#displaySwordExpireTime();
+
+			//snakes become killable
+
+			//play takeSword sound
+			this.takeSwordSound.play();
+			this.spartaSound.play();
+
+			//sword timer = 6 seconds, after that player switches back to vulnerable
+			let swordTimer = setTimeout(() => {
+				this.takeSwordActive = false;
+				this.#loadPlayerImages();
+				this.#displaySwordExpired();
+			}, 1000 * 6);
+		}
+	}
+
+	//kill snake
+	#killEnemy(enemies) {
+		if (this.takeSwordActive) {
+			const collideEnemies = enemies.filter((enemy) => enemy.collideWith(this));
+			collideEnemies.forEach((enemy) => {
+				enemies.splice(enemies.indexOf(enemy), 1);
+				this.killEnemySound.play();
+			});
+		}
+	}
+
+	//key related
+
+	#keyText() {
+		document.getElementById('instructions').innerHTML = '';
+		document.getElementById('display').innerHTML = 'You have the Key!';
+		document.getElementById('display2').innerHTML =
+			'You can now exit the maze. Head towards the exit.';
+		setTimeout(() => {
+			document.getElementById('display').innerHTML = '';
+			document.getElementById('display2').innerHTML = '';
+		}, 1000 * 4);
+	}
+
+	#takeKey() {
+		if (this.tileMap.takeKey(this.x, this.y)) {
+			this.keyTaken = true;
+			this.takeKeySound.play();
+			this.#keyText();
+		}
+	}
+
+	#openDoor() {
+		if (this.tileMap.openDoor(this.x, this.y) && this.keyTaken == true) {
+			this.unlockDoorSound.play();
+			this.escapedMaze = true;
+		}
+	}
 }

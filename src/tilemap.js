@@ -29,15 +29,15 @@ export default class TileMap {
 	// 6 = sword powerup
 	map = [
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-		[1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+		[1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1],
 		[1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
 		[1, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
 		[1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
-		[1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+		[1, 0, 1, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 1],
 		[1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1],
-		[1, 0, 1, 0, 1, 0, 1, 3, 6, 1, 0, 1, 1, 0, 1],
+		[1, 0, 1, 0, 1, 0, 1, 6, 0, 1, 0, 1, 1, 0, 1],
 		[1, 0, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1],
-		[1, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 1],
+		[1, 0, 5, 0, 3, 0, 0, 0, 0, 0, 0, 0, 1, 4, 1],
 		[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 	];
 
@@ -221,14 +221,42 @@ export default class TileMap {
 		return false;
 	}
 
-	// takeSword(x, y) {
-	// 	const row = y / this.tileSize;
-	// 	const column = x / this.tileSize;
-	// 	console.log(tile);
-	// 	if (Number.isInteger(row) && Number.isInteger(column)) {
-	// 		if (this.map[row][column] === 6) {
-	// 			this.map[row][column] = 0;
-	// 		}
-	// 	}
-	// }
+	takeSword(x, y) {
+		const row = y / this.tileSize;
+		const column = x / this.tileSize;
+		if (Number.isInteger(row) && Number.isInteger(column)) {
+			const tile = this.map[row][column];
+			if (tile == 6) {
+				this.map[row][column] = 0;
+				return true;
+			}
+		}
+		return false;
+	}
+
+	takeKey(x, y) {
+		const row = y / this.tileSize;
+		const column = x / this.tileSize;
+		if (Number.isInteger(row) && Number.isInteger(column)) {
+			const tile = this.map[row][column];
+			if (tile == 3) {
+				this.map[row][column] = 0;
+				return true;
+			}
+		}
+		return false;
+	}
+
+	openDoor(x, y) {
+		const row = y / this.tileSize;
+		const column = x / this.tileSize;
+		if (Number.isInteger(row) && Number.isInteger(column)) {
+			const tile = this.map[row][column];
+			if (tile == 4) {
+				this.map[row][column] = 4;
+				return true;
+			}
+		}
+		return false;
+	}
 }
