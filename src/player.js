@@ -208,7 +208,7 @@ export default class Player {
 
 	#displaySwordExpired() {
 		document.getElementById('display').innerHTML =
-			'The sword has broken under the pressure of the evil labyrinth.';
+			'The sword has broken under the supernatural pressure of the evil labyrinth.';
 		document.getElementById('display2').innerHTML =
 			'You have lost the ability to kill the snakemen. Run.';
 		setTimeout(() => {
@@ -274,15 +274,12 @@ export default class Player {
 	#displayGameWin() {
 		document.getElementById('display').innerHTML =
 			'Player has escaped the Maze.';
-		document.getElementById('display2').innerHTML = 'Congratulations.';
+		document.getElementById('display2').innerHTML =
+			'Congratulations, you are a Super Idol!';
 	}
 
 	#openDoor() {
 		if (this.tileMap.openDoor(this.x, this.y) && this.keyTaken == true) {
-			this.unlockDoorSound.play();
-			setTimeout(() => {
-				this.unlockDoorSound.pause();
-			}, 1000 * 2);
 			this.escapedMaze = true;
 			this.#displayGameWin();
 		}

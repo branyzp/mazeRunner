@@ -2,8 +2,8 @@ import TileMap from './tilemap.js';
 
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
-const tileSize = 64;
-const velocity = 4;
+const tileSize = 32;
+const velocity = 2;
 
 const tileMap = new TileMap(tileSize);
 const player = tileMap.getPlayer(velocity);
@@ -26,11 +26,25 @@ function gameLoop() {
 	checkGameWin();
 }
 
+function resetGame() {
+	//sorry simon
+	location.reload();
+
+	gameLoop();
+}
+
+function playAgain() {
+	let playAgainPrompt = document.getElementById('playAgain');
+	playAgainPrompt.style.display = 'block';
+	playAgainPrompt.addEventListener('click', resetGame);
+}
+
 function checkGameWin() {
 	if (!gameWin) {
 		gameWin = player.escapedMaze;
 		if (gameWin) {
 			gameWinSound.play();
+			playAgain();
 		}
 	}
 }
@@ -40,8 +54,14 @@ function checkGameOver() {
 		gameOver = isGameOver();
 		if (gameOver) {
 			playerDeathSound.play();
+			document.getElementById('instructions').innerHTML = '';
+			document.getElementById('display').innerHTML =
+				'You were eaten by the Snakemen.';
+			document.getElementById('display2').innerHTML =
+				'You suffer massive damage, mostly emotional.';
 			setTimeout(() => {
 				gameOverSound.play();
+				playAgain();
 			}, 1000);
 		}
 	}
