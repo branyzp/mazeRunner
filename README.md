@@ -62,11 +62,15 @@ The player, enemies, floor, walls, sword, key and exit are all different types o
 ***What in my code and program design in the project would I do differently next time?*** <br>
 I would definitely have added more comments whilst writing my code, as this would enable me to see in a clearer light exactly what each line does instead of having to re-visit the code after a few hours and taking time to comprehend what I was doing at that certain point.
 I would have definitely refactored my code to be more concise as, to be honest, it does look confusing from a third-person perspective.
-<br> for example, if I didn't know what I was trying to achieve with this, the maintainer of this code will have a hard time trying to decrypt.
+<br> for example, if I didn't know what I was trying to achieve with this, the maintainer of this code will have a hard time trying to decrypt. <br>
 ![takeSword](https://user-images.githubusercontent.com/98401776/168574551-d61e498a-8700-4039-b90f-a26825c3461d.PNG)
 
 <br> after writing comments, it does look more neat in a certain manner.
 ![takeSword2](https://user-images.githubusercontent.com/98401776/168574595-8baa6aee-6d19-44f4-9744-8f954cb930aa.PNG)
+<br>
+
+Also, I could have written my code in a way that would make it easier to reset the game instead of having to reload the entire page. <br>
+![reloadPage](https://user-images.githubusercontent.com/98401776/168602542-fc9b3835-c979-4788-adfb-188bdb7ac47b.PNG)
 
 
 ***What in my code and program design in the project went well? Is there anything I would do the same next time?***
