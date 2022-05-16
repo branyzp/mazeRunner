@@ -103,28 +103,28 @@ export default class Player {
 
 	#keydown = (event) => {
 		//up
-		if (event.keyCode == 38) {
+		if (event.keyCode == 38 || event.keyCode == 87) {
 			if (this.currentMoveDirection == moveDirection.down)
 				this.currentMoveDirection = moveDirection.up;
 			this.requestedMoveDirection = moveDirection.up;
 			this.madeFirstMove = true;
 		}
 		//down
-		if (event.keyCode == 40) {
+		if (event.keyCode == 40 || event.keyCode == 83) {
 			if (this.currentMoveDirection == moveDirection.up)
 				this.currentMoveDirection = moveDirection.down;
 			this.requestedMoveDirection = moveDirection.down;
 			this.madeFirstMove = true;
 		}
 		//left
-		if (event.keyCode == 37) {
+		if (event.keyCode == 37 || event.keyCode == 65) {
 			if (this.currentMoveDirection == moveDirection.right)
 				this.currentMoveDirection = moveDirection.left;
 			this.requestedMoveDirection = moveDirection.left;
 			this.madeFirstMove = true;
 		}
 		//right
-		if (event.keyCode == 39) {
+		if (event.keyCode == 39 || event.keyCode == 68) {
 			if (this.currentMoveDirection == moveDirection.left)
 				this.currentMoveDirection = moveDirection.right;
 			this.requestedMoveDirection = moveDirection.right;
