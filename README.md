@@ -86,7 +86,8 @@ than staring at code for long periods hoping for a light bulb to light up in my 
 - Stubborness - feel guilty taking breaks
 - Comments need to be written, I ask to be forgiven
 
-
+## References
+I take no credit for all images and music used in this production.
 
 
 
